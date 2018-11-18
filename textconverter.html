@@ -1,0 +1,171 @@
+
+
+<script>
+
+//convert hex to sting
+function hextoString(S){
+news=""
+//remove spaces
+news=S.trim().replace(/\s/g,'');
+
+//spliting into 2's
+news=news.match(/.{1,2}/g);
+
+//convert to int then to chars
+out="";
+for(var i = 0;i<news.length;i++){
+e=parseInt(news[i],16);
+out=out+inttochar(e);
+}
+return out;
+} 
+
+
+
+//converts binary to a string
+function bintoString(S){
+
+S=S.trim()
+news=""
+//remove all non 1/0 characters 
+for (var i = 0; i < S.length; i++) {
+if(S.charAt(i)=='1'||S.charAt(i)=='0'){
+news=news+S.charAt(i);
+}
+}
+
+news=news.match(/.{1,8}/g);
+bin=S.split(" ");
+
+out="";
+for(var i = 0;i<news.length;i++){
+e=parseInt(news[i],2);
+out=out+inttochar(e);
+}
+return out;
+}
+
+
+//converts int to respective char
+function inttochar(c){
+ return String.fromCharCode(c);
+}
+
+
+//converts string to binary
+function Stringtobin(S){
+var bin="";
+for (var i = 0; i < S.length;i++){
+charcode=S.charAt(i).charCodeAt(0);
+charbin=dectobin(charcode);
+bin=bin+" "+charbin;
+}
+return bin.trim();
+}
+
+//converts String to hex
+function Stringtohex(S){
+var hex="";
+for (var i = 0; i < S.length; i++) {
+charcode=S.charAt(i).charCodeAt(0)
+charhex=dectohex(charcode);
+hex=hex+" "+charhex;
+}
+return hex.trim(); 
+}
+
+//converts int to bin
+function dectobin(x){
+  bin=x.toString(2);
+  while (bin.length < 8) {
+     bin = '0' + bin;
+  }
+  return bin;
+}
+
+//converts int to hex
+function dectohex(x){
+  hex=x.toString(16);
+  return hex  
+}
+
+//input function for text
+function stringGet(){
+text=document.getElementById("text").value;
+document.getElementById("bin").value=Stringtobin(text);
+document.getElementById("hex").value=Stringtohex(text);
+}
+
+//input function 
+function binString(){
+bin=document.getElementById("bin").value;
+str=bintoString(bin);
+
+document.getElementById("text").value=str;
+document.getElementById("hex").value=Stringtohex(str);
+
+ 
+}
+
+//input function for hex
+function hexget(){
+val=document.getElementById("hex").value;
+
+console.log(val);
+str=hextoString(val);
+console.log(str);
+
+document.getElementById("text").value=str;
+document.getElementById("bin").value=Stringtobin(str);
+}
+
+</script>
+
+<style>
+table{
+width:100%;
+height:100%;
+}
+textarea{
+width: 100%;
+  height: 100%;
+}
+</style>
+
+<body>
+
+<table>
+<tr>
+<td>
+<textArea id="text">
+</textArea>
+</td>
+<td>
+<button onClick="stringGet()">
+convert text
+</button>
+</td>
+</tr>
+<tr>
+<td>
+<textArea id="bin">
+</textArea>
+</td>
+<td>
+<button onClick="binString()">
+convert bin
+</button>
+</td>
+</tr>
+<td>
+<textArea id="hex">
+</textArea>
+</td>
+<td>
+<button onClick="hexget()">
+convert hex
+</button>
+</td>
+</table>
+</body>
+
